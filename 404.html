@@ -1,14 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <title>Redirecting...</title>
-    <script type="text/javascript">
-      // Capture the current path
+    <script>
+      // Preserve the full URL path
       const path = window.location.pathname + window.location.search + window.location.hash;
-      // Redirect to root with the original path preserved
-      window.location.replace(path);
+
+      // Only redirect if the requested file doesn't exist
+      // Serve index.html (React app) so React Router handles the path
+      window.location.href = '/?redirect=' + encodeURIComponent(path);
     </script>
   </head>
-  <body></body>
+  <body>
+    <p>Loading...</p>
+  </body>
 </html>
