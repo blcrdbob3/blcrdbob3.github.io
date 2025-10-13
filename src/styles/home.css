@@ -1,0 +1,70 @@
+/* src/styles/home.css */
+.home-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+}
+
+/* Header + nav */
+.site-header {
+  font-size: 34px;
+  margin-top: 10vh;
+  margin-bottom: 2.5vh;
+  letter-spacing: 0.5px;
+  text-shadow: 0 0 8px rgba(127, 209, 255, 0.2);
+  transition: text-shadow var(--transition), color var(--transition);
+}
+
+.site-header:hover {
+  color: var(--accent);
+  text-shadow: 0 0 10px var(--accent);
+}
+
+.home-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.menu-item {
+  font-size: 20px;
+  transition: transform var(--transition);
+}
+
+.menu-item a {
+  color: var(--text);
+  text-decoration: none;
+  transition: color var(--transition), text-shadow var(--transition);
+}
+
+.menu-item a:hover,
+.menu-item a:focus {
+  color: var(--accent);
+  text-shadow: 0 0 6px var(--accent);
+}
+
+.menu-item:hover {
+  transform: translateY(-2px);
+}
+
+/* 🌊 Ocean container: fixed full width, bottom-aligned */
+.ocean-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;   /* bottom = 0, left = 0, right = 0 */
+  width: 100vw;
+  height: 20vh;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 1;
+}

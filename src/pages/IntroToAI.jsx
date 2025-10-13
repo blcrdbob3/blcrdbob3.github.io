@@ -1,4 +1,5 @@
-import "../styles/terminal.css";
+import "../styles/base.css";
+import "../styles/intro_to_ai.css";
 
 export default function ProjectIntroAI() {
   return (

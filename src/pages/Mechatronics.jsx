@@ -1,4 +1,5 @@
-import "../styles/terminal.css";
+import "../styles/base.css";
+import "../styles/mechatronics.css";
 
 export default function ProjectMechatronics() {
   return (

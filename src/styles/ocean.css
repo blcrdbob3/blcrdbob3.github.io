@@ -1,0 +1,70 @@
+/* src/styles/ocean.css */
+.ocean-terminal {
+  width: 100%;
+  height: 100%;
+  display: block;
+  margin: 0;   /* ✅ remove pre margin */
+  padding: 0;
+  font-family: monospace;
+  /* Use explicit pixel values so JS can compute rows precisely */
+  font-size: 14px;
+  line-height: 14px;
+  box-sizing: border-box;
+  white-space: pre;
+  user-select: none;
+
+  /* Gradient text */
+  background: linear-gradient(to right, #2dd4bf, #2563eb);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  /* Glow effect */
+  opacity: 0.9;
+  text-shadow:
+    0 0 4px rgba(45, 212, 191, 0.4),
+    0 0 10px rgba(45, 212, 191, 0.6),
+    0 0 20px rgba(37, 99, 235, 0.4);
+  filter: drop-shadow(0 0 8px rgba(37, 99, 235, 0.3));
+
+  animation:
+    oceanFlow 12s linear infinite,
+    shimmer 4s ease-in-out infinite,
+    glowPulse 3s ease-in-out infinite alternate;
+}
+
+/* Smooth horizontal motion */
+@keyframes oceanFlow {
+  from { transform: translateX(0); }
+  to { transform: translateX(-1ch); }
+}
+
+/* Subtle shimmer flicker */
+@keyframes shimmer {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 1; }
+}
+
+/* Gentle glowing pulse */
+@keyframes glowPulse {
+  0% {
+    text-shadow:
+      0 0 4px rgba(45, 212, 191, 0.4),
+      0 0 10px rgba(45, 212, 191, 0.6),
+      0 0 20px rgba(37, 99, 235, 0.4);
+  }
+  100% {
+    text-shadow:
+      0 0 6px rgba(45, 212, 191, 0.5),
+      0 0 14px rgba(45, 212, 191, 0.7),
+      0 0 28px rgba(37, 99, 235, 0.6);
+  }
+}
+
+/* ensure the <pre> sits at the bottom of its container */
+.ocean-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* pushes <pre> to the bottom */
+  align-items: stretch;
+}
