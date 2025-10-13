@@ -1,0 +1,1 @@
+import{j as s}from"./base-Smj_bDve.js";function e(){return s.jsxs("div",{children:[s.jsx("h1",{className:"page-title",children:"# about"}),s.jsx("p",{children:"This is the about page."})]})}export{e as A};
