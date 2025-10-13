@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <title>Redirecting...</title>
     <script type="text/javascript">
-      // Get the full path the user requested
+      // Capture the current path
       const path = window.location.pathname + window.location.search + window.location.hash;
-      // Redirect to index.html while preserving the path in the URL
-      window.location.replace('/index.html' + path);
+      // Redirect to root with the original path preserved
+      window.location.replace(path);
     </script>
   </head>
   <body></body>
