@@ -62,7 +62,7 @@ export default function Ocean({ length = 400 }) {
 
       el.textContent = text;
 
-      // 🌊 Variable wave speed — oscillates smoothly between 0.4 and 0.5
+      // Variable wave speed — oscillates smoothly between 0.4 and 0.5
       const waveSpeed = 0.45 + Math.sin(timeElapsed * 0.8) * 0.05;
       offset += waveSpeed;
 

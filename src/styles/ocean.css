@@ -61,7 +61,7 @@
   }
 }
 
-/* ensure the <pre> sits at the bottom of its container */
+/* Ensure the <pre> sits at the bottom of its container */
 .ocean-container {
   display: flex;
   flex-direction: column;

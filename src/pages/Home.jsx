@@ -34,7 +34,7 @@ export default function Home() {
         </nav>
       </div>
 
-      {/* 🌊 Fixed, full-width ocean container (bottom 20% of screen) */}
+      {/* Fixed, full-width ocean container (bottom 20% of screen) */}
       <div className="ocean-container">
         <Ocean length={400} />
       </div>
