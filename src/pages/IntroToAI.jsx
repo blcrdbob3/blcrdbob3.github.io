@@ -1,3 +1,5 @@
+import "../styles/terminal.css";
+
 export default function ProjectIntroAI() {
   return (
     <div>

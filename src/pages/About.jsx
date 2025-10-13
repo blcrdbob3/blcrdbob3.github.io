@@ -1,3 +1,5 @@
+import "../styles/terminal.css";
+
 export default function About() {
   return (
     <div>
