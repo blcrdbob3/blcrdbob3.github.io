@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="refresh" content="0; URL=/" />
+    <meta charset="UTF-8" />
+    <title>Redirecting...</title>
+    <script type="text/javascript">
+      // Get the full path the user requested
+      const path = window.location.pathname + window.location.search + window.location.hash;
+      // Redirect to index.html while preserving the path in the URL
+      window.location.replace('/index.html' + path);
+    </script>
   </head>
-  <body>
-  </body>
+  <body></body>
 </html>
