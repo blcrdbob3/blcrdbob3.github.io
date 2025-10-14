@@ -31,6 +31,13 @@
     oceanFlow 12s linear infinite,
     shimmer 4s ease-in-out infinite,
     glowPulse 3s ease-in-out infinite alternate;
+
+  /* Prevent characters (like the outline '#') from bleeding outside
+     the vertical bounds of the container. This clips any glyphs that
+     render above/below the intended area. */
+  overflow: hidden;
+  max-height: 100%;
+  contain: layout paint size;
 }
 
 /* Smooth horizontal motion */

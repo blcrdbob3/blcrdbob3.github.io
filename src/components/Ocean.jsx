@@ -9,29 +9,44 @@ export default function Ocean({ length = 400 }) {
     const el = ref.current;
     if (!el) return;
 
-    // Pre-generate stable randomness to prevent flicker
-    const noise = Array.from({ length: length * 100 }, () => Math.random());
+    const NOISE_SIZE = length * 100;
+    const baseNoise = new Float32Array(NOISE_SIZE).map(() => Math.random());
 
     let offset = 0;
     let rafId;
     let lastFrame = 0;
-    let timeElapsed = 0; // track elapsed time for speed oscillation
+    let timeElapsed = 0;
+    let glitchPhase = 0;
+    let prevHeights = new Float32Array(length).fill(0);
+
+    const lerp = (a, b, t) => a + (b - a) * t;
+
+    function mutateNoise(globalPhase) {
+      const baseIntensity = 0.001 + Math.sin(globalPhase * 0.1) * 0.001;
+      for (let i = 0; i < NOISE_SIZE; i++) {
+        const xPhase = (i % length) / length;
+        const phaseMod = (Math.sin(globalPhase * 0.4 + xPhase * Math.PI * 2) + 1) * 0.5;
+        const prob = baseIntensity * (0.3 + phaseMod);
+        if (Math.random() < prob) baseNoise[i] = Math.random();
+      }
+    }
 
     const draw = (time) => {
-      // Limit frame rate to ~30 fps for smoother performance
       if (time - lastFrame < 33) {
         rafId = requestAnimationFrame(draw);
         return;
       }
 
-      const deltaTime = time - lastFrame;
+      const delta = time - lastFrame;
       lastFrame = time;
-      timeElapsed += deltaTime * 0.001; // convert ms to seconds
+      timeElapsed += delta * 0.001;
 
-      // Dynamically compute container height
+      // Mutate noise occasionally to avoid static look
+      if (timeElapsed % 0.6 < 0.033) mutateNoise(glitchPhase);
+      glitchPhase += delta * 0.002;
+
       const container = el.parentElement;
       const h = container?.getBoundingClientRect().height || window.innerHeight * 0.2;
-
       const computed = window.getComputedStyle(el);
       const lineHeight = parseFloat(computed.lineHeight) || 14;
       const rows = Math.ceil(h / lineHeight);
@@ -39,21 +54,33 @@ export default function Ocean({ length = 400 }) {
 
       let text = "";
 
+      // Compute smooth wave heights per column
+      const waveHeights = new Float32Array(cols);
+      for (let x = 0; x < cols; x++) {
+        const base =
+          Math.sin((x + offset) / 8) * 2 +
+          Math.sin((x + offset) / 17) * 1.5 +
+          2.5;
+        waveHeights[x] = lerp(prevHeights[x], base, 0.15); // smoother transitions
+      }
+      prevHeights = waveHeights;
+
       for (let y = 0; y < rows; y++) {
         for (let x = 0; x < cols; x++) {
-          const waveHeight = Math.sin((x + offset) / 8) * 2 + 2;
-          const surfaceY = Math.floor(waveHeight);
-          const i = (y * length + x + Math.floor(offset)) % noise.length;
-          const n = noise[i];
+          const surfaceY = Math.round(waveHeights[x]);
+          const i = (y * length + x + Math.floor(offset)) % baseNoise.length;
+          const n = baseNoise[i];
 
           if (y === surfaceY) {
-            // Outline: only '#' and spaces
-            text += n < 0.15 ? " " : "#";
+            // stable single outline
+            text += "#";
           } else if (y > surfaceY) {
-            // Below the surface: dots and some spaces
-            text += n < 0.85 ? "." : " ";
+            // below surface: dampen noise near the top to reduce shimmer
+            const depth = y - surfaceY;
+            const noiseFactor = depth < 2 ? 0.93 : 0.85; // smoother near top
+            text += n < noiseFactor ? "." : " ";
           } else {
-            // Above: empty air
+            // above surface: air
             text += " ";
           }
         }
@@ -62,9 +89,9 @@ export default function Ocean({ length = 400 }) {
 
       el.textContent = text;
 
-      // Variable wave speed — oscillates smoothly between 0.4 and 0.5
+      // Smooth oscillating horizontal movement
       const waveSpeed = 0.45 + Math.sin(timeElapsed * 0.8) * 0.05;
-      offset += waveSpeed;
+      offset = lerp(offset, offset + waveSpeed, 0.8); // slightly smoothed offset shift
 
       rafId = requestAnimationFrame(draw);
     };
