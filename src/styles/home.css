@@ -15,7 +15,7 @@
 
 /* Header + nav */
 .site-header {
-  font-size: 34px;
+  font-size: 40px;
   margin-top: 10vh;
   margin-bottom: 2.5vh;
   letter-spacing: 0.5px;
@@ -36,7 +36,7 @@
 }
 
 .menu-item {
-  font-size: 20px;
+  font-size: 24px;
   transition: transform var(--transition);
 }
 

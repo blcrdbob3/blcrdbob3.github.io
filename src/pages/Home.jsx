@@ -31,6 +31,26 @@ export default function Home() {
               />
             </Link>
           </div>
+
+          <div className="menu-item">
+            <Link to="/projects">
+              <ScrambleHover
+                initial="# resume"
+                final="> my skills and talents"
+                className="scramble"
+              />
+            </Link>
+          </div>
+
+          <div className="menu-item">
+            <Link to="/projects">
+              <ScrambleHover
+                initial="# games"
+                final="> web games for fun :)"
+                className="scramble"
+              />
+            </Link>
+          </div>
         </nav>
       </div>
 
