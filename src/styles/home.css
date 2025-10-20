@@ -8,16 +8,17 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start; /* left align content */
   justify-content: flex-start;
-  text-align: center;
+  text-align: left;
 }
 
 /* Header + nav */
 .site-header {
   font-size: 40px;
-  margin-top: 10vh;
-  margin-bottom: 2.5vh;
+  margin-top: 12vh; /* slightly more top spacing when left-aligned */
+  margin-bottom: 1.2vh;
+  margin-left: 6vw; /* responsive left padding */
   letter-spacing: 0.5px;
   text-shadow: 0 0 8px rgba(127, 209, 255, 0.2);
   transition: text-shadow var(--transition), color var(--transition);
@@ -31,8 +32,9 @@
 .home-nav {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start; /* left-align menu items */
   gap: 0.9rem;
+  margin-left: 6vw; /* match header padding */
 }
 
 .menu-item {
@@ -61,7 +63,7 @@
   position: fixed;
   bottom: 0;
   left: 0;
-  right: 0;   /* bottom = 0, left = 0, right = 0 */
+  right: 0;
   width: 100vw;
   height: 20vh;
   overflow: hidden;

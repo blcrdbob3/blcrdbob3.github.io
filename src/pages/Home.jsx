@@ -26,7 +26,7 @@ export default function Home() {
             <Link to="/projects">
               <ScrambleHover
                 initial="# projects"
-                final="> awesome stuff I've made"
+                final="> awesome things I've made"
                 className="scramble"
               />
             </Link>
@@ -36,7 +36,7 @@ export default function Home() {
             <Link to="/projects">
               <ScrambleHover
                 initial="# resume"
-                final="> my skills and talents"
+                final="> my skills and experience"
                 className="scramble"
               />
             </Link>

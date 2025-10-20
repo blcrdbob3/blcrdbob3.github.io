@@ -35,8 +35,16 @@ body {
 /* Terminal-style layout */
 .terminal {
   max-width: var(--max-width);
-  margin: 0 auto;
+  /* move to left side instead of centered */
+  margin: 0 0 0 6vw;
   background: transparent;
   border: none;
   padding: 1rem 0;
+}
+
+/* On very small screens, reduce the left margin so content isn't pushed off */
+@media (max-width: 600px) {
+  .terminal {
+    margin-left: 3vw;
+  }
 }
