@@ -1,5 +1,5 @@
 # Personal Website
-This repository previously hosted the website for **blcrdbob3.github.io**.
+This repository previously hosted the website for **henrylatt.github.io**.
 It now exists solely to redirect visitors to the new site:
 
 **https://henrylatt.com**
